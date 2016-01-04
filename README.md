@@ -20,7 +20,7 @@ Now `POST` an image file, a message file and a password to
 the image with the secret embedded. The following example reproduces the one
 from [this guide][scottlinux]:
 
-    $ curl -F the_image=@tux.jpg -F the_secret=@mytext.txt -F the_password=scottlinux http://localhost:8080/embed > stegtux.jpg
+    $ curl -F coverImage=@tux.jpg -F secretFile=@mytext.txt -F extractionPassword=scottlinux http://localhost:8080/embed > stegtux.jpg
 
 Alternatively, fire up `http://localhost:8080` in your browser and fill in the form.
 
