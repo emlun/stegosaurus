@@ -13,6 +13,7 @@
     "webapp"
   ],
   "author": "Emil Lundberg <lundberg.emil@gmail.com>",
+  "repository": "https://github.com/emlun/stegosaurus",
   "license": "MIT",
   "dependencies": {
     "express": "^4.13.3",
