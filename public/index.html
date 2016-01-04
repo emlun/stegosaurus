@@ -11,7 +11,7 @@
       href="https://en.wikipedia.org/wiki/Steganography">steganography</a>.
   </p>
 
-  <form action="http://localhost:8080/embed" method="post" enctype="multipart/form-data">
+  <form action="embed" method="post" enctype="multipart/form-data">
     <div>Image: <input type="file" name="coverImage" /></div>
     <div>Secret file: <input type="file" name="secretFile" /></div>
     <div>Extraction password: <input type="password" name="extractionPassword" /></div>
@@ -23,7 +23,7 @@
 
   <p>This service will reverse what the one above did.</p>
 
-  <form action="http://localhost:8080/extract" method="post" enctype="multipart/form-data">
+  <form action="extract" method="post" enctype="multipart/form-data">
     <div>Image: <input type="file" name="stegoImage" /></div>
     <div>Extraction password: <input type="password" name="extractionPassword" /></div>
     <button type="reset">Reset</button>
