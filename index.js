@@ -14,11 +14,11 @@ var steghide = require('./steghide');
  *
  *    - `uploadDir`: String (`/tmp/stegosaurus`) the path under which to store
  *      temporary files
- *    - `imageFileParamName`: String (`the_image`) the name of the HTTP query
+ *    - `imageFileParamName`: String (`coverImage`) the name of the HTTP query
  *      parameter containing the cover image data
- *    - `messageFileParamName`: String (`the_secret`) the name of the HTTP
+ *    - `messageFileParamName`: String (`secretFile`) the name of the HTTP
  *      query parameter containing the message file data
- *    - `extractionPasswordParamName`: String (`the_password`) the name of the
+ *    - `extractionPasswordParamName`: String (`extractionPassword`) the name of the
  *      HTTP query parameter containing the extraction password
  *    - `responseFileNamePrefix`: String (`steghidden-`) the prefix to prepend
  *      to the uploaded image file name for the result file
@@ -27,9 +27,9 @@ module.exports.embedHandler = function(options) {
   options = options || {};
   _.defaults(options, {
     uploadDir: '/tmp/stegosaurus',
-    imageFileParamName: 'the_image',
-    messageFileParamName: 'the_secret',
-    extractionPasswordParamName: 'the_password',
+    imageFileParamName: 'coverImage',
+    messageFileParamName: 'secretFile',
+    extractionPasswordParamName: 'extractionPassword',
     responseFileNamePrefix: 'steghidden-',
   });
 
