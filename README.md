@@ -31,5 +31,6 @@ Disclaimer
 ===
 
 This software is, in its current incarnation, **NOT SECURE** in any sense of
-the word. It was lazily whipped together in an hour as a fun proof of concept.
-**DO NOT USE THIS SOFTWARE FOR ANYTHING YOU ACTUALLY NEED TO HIDE OR PROTECT**.
+the word. It was lazily whipped together in a few hours as a fun proof of
+concept. **DO NOT USE THIS SOFTWARE FOR ANYTHING YOU ACTUALLY NEED TO HIDE OR
+PROTECT**.
