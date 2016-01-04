@@ -17,16 +17,22 @@ app.post('/embed', function(req, res) {
       return false;
     }
 
+    var image_path = files.the_image[0].path;
+    var secret_path = files.the_secret[0].path;
+
     var steghidden_path = steghide_embed(
-      files.the_image[0].path,
-      files.the_secret[0].path,
+      image_path,
+      secret_path,
       fields.the_password[0]
     );
 
-    res.download(steghidden_path, 'steghidden-' + files.the_image[0].originalFilename);
+    function cleanup(image_path, secret_path, steghidden_path) {
+      _([image_path, secret_path, steghidden_path]).each(function(path) { fs.unlink(path); });
+    }
 
-    _(files.the_image).each(function(file) { fs.unlink(file.path); });
-    _(files.the_secret).each(function(file) { fs.unlink(file.path); });
+    res.download(steghidden_path, 'steghidden-' + files.the_image[0].originalFilename, function(err) {
+      cleanup(image_path, secret_path, steghidden_path);
+    });
   });
 });
 
