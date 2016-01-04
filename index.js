@@ -33,6 +33,8 @@ module.exports.embedHandler = function(options) {
     responseFileNamePrefix: 'steghidden-',
   });
 
+  fs.mkdirp(options.uploadDir);
+
   return function(req, res) {
     var form = new multiparty.Form({
       uploadDir: options.uploadDir,
@@ -84,6 +86,8 @@ module.exports.extractHandler = function(options) {
     imageFileParamName: 'stegoImage',
     extractionPasswordParamName: 'extractionPassword',
   });
+
+  fs.mkdirp(options.uploadDir);
 
   return function(req, res) {
     var form = new multiparty.Form({
