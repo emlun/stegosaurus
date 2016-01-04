@@ -54,12 +54,11 @@ module.exports.embedHandler = function(options) {
         fields[options.extractionPasswordParamName][0]
       );
 
-      function cleanup(imagePath, secretPath, steghiddenPath) {
+      function cleanup() {
         _([imagePath, secretPath, steghiddenPath]).each(function(path) { fs.unlink(path); });
       }
 
-      res.download(steghiddenPath, options.responseFileNamePrefix + imageFile.originalFilename, function(err) {
-        cleanup(imagePath, secretPath, steghiddenPath);
+        res.download(steghiddenPath, options.responseFileNamePrefix + imageFile.originalFilename, cleanup);
       });
     });
   }
