@@ -6,13 +6,13 @@ var tmp = require('tmp');
 var _ = require('underscore');
 
 /**
- * @param imagePath the path to the image to use as the "cover file" -cf
+ * @param imagePath: String the path to the image to use as the "cover file" -cf
  *   argument to steghide
- * @param messagePath the path to the file to use as the "embed file" -ef
+ * @param messagePath: String the path to the file to use as the "embed file" -ef
  *   argument to steghide
- * @param password the password to use for encrypting the message before
+ * @param password: String the password to use for encrypting the message before
  *   embedding it
- * @return the path to the created stego file
+ * @return String the path to the created stego file
  */
 module.exports.embed = function(imagePath, messagePath, password) {
   var steghiddenPath = imagePath + '.steghidden';

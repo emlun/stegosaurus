@@ -8,8 +8,8 @@ var steghide = require('./steghide');
 /**
  * Build a request handler around steghide embed
  *
- * @param options the settings to use for the request handler. Expects an
- *   object with zero or more of the following keys. The format for the below
+ * @param options: Object the settings to use for the request handler. Expects
+ *   an object with zero or more of the following keys. The format for the below
  *   is `name`: type (default).
  *
  *    - `uploadDir`: String (`/tmp/stegosaurus`) the path under which to store
