@@ -19,6 +19,16 @@
     <button type="submit">Submit</button>
   </form>
 
+  <h1>Extract message from image</h1>
+
+  <p>This service will reverse what the one above did.</p>
+
+  <form action="http://localhost:8080/extract" method="post" enctype="multipart/form-data">
+    <div>Image: <input type="file" name="stegoImage" /></div>
+    <div>Extraction password: <input type="password" name="extractionPassword" /></div>
+    <button type="reset">Reset</button>
+    <button type="submit">Submit</button>
+  </form>
 
   <h1>Disclaimer</h1>
   <p>

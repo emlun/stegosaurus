@@ -4,6 +4,7 @@ var stegosaurus = require('.');
 
 var app = express();
 app.post('/embed', stegosaurus.embedHandler());
+app.post('/extract', stegosaurus.extractHandler());
 app.use(express.static('public'));
 
 var server = app.listen(8080, function() {

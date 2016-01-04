@@ -76,3 +76,42 @@ module.exports.embedHandler = function(options) {
     });
   }
 };
+
+module.exports.extractHandler = function(options) {
+  options = options || {};
+  _.defaults(options, {
+    uploadDir: '/tmp/stegosaurus',
+    imageFileParamName: 'stegoImage',
+    extractionPasswordParamName: 'extractionPassword',
+  });
+
+  return function(req, res) {
+    var form = new multiparty.Form({
+      uploadDir: options.uploadDir,
+    });
+
+    form.parse(req, function(err, fields, files) {
+      if(err) {
+        res.status(401).send('401 Bad request');
+        console.log('Bad request', err);
+        return false;
+      }
+      var imageFile = files[options.imageFileParamName][0];
+
+      var imagePath = imageFile.path;
+
+      steghide.extract(
+        imagePath,
+        fields[options.extractionPasswordParamName][0],
+        function(extractedPath, steghideCleanup) {
+          function cleanup() {
+            _([imagePath, extractedPath]).each(function(path) { fs.rmrfSync(path); });
+            steghideCleanup();
+          }
+
+          res.download(extractedPath, path.basename(extractedPath), cleanup);
+        }
+      );
+    });
+  }
+};

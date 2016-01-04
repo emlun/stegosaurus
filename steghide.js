@@ -1,5 +1,9 @@
 var child_process = require('child_process');
+var path = require('path');
+var fs = require('fs.extra');
 var sprintf = require('sprintf').sprintf;
+var tmp = require('tmp');
+var _ = require('underscore');
 
 /**
  * @param imagePath the path to the image to use as the "cover file" -cf
@@ -22,4 +26,31 @@ module.exports.embed = function(imagePath, messagePath, password) {
   ));
 
   return steghiddenPath;
+};
+
+module.exports.extract = function(imagePath, password, callback) {
+  var tmpdir = tmp.dirSync();
+
+  var output = child_process.exec(
+    sprintf(
+      'steghide extract -sf "%s" -p "%s"',
+      imagePath,
+      password
+    ), {
+      cwd: tmpdir.name,
+    }, function(err, stdout, stderr) {
+      var outputFileName = _(stderr.split('"')).chain()
+        .rest()
+        .initial()
+        .value()
+        .join('"');
+
+      var cleanup = _.once(function() {
+        fs.rmrfSync(tmpdir.name);
+      });
+
+      callback(path.join(tmpdir.name, outputFileName), cleanup);
+    }
+  );
+
 };
