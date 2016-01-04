@@ -1,7 +1,7 @@
 var child_process = require('child_process');
 var sprintf = require('sprintf').sprintf;
 
-var steghideEmbed = module.exports.steghideEmbed = function(imagePath, messagePath, password) {
+module.exports.embed = function(imagePath, messagePath, password) {
   var steghiddenPath = imagePath + '.steghidden';
 
   child_process.execSync(sprintf(

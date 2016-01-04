@@ -3,9 +3,9 @@ var multiparty = require('multiparty');
 var fs = require('fs');
 var _ = require('underscore');
 
-var app = express();
+var steghide = require('./steghide');
 
-var steghideEmbed = require('.').steghideEmbed;
+var app = express();
 
 function steghideEmbedHandler(options) {
   options = options || {};
@@ -33,7 +33,7 @@ function steghideEmbedHandler(options) {
       var imagePath = imageFile.path;
       var secretPath = files[options.messageFileParamName][0].path;
 
-      var steghiddenPath = steghideEmbed(
+      var steghiddenPath = steghide.embed(
         imagePath,
         secretPath,
         fields[options.extractionPasswordParamName][0]
