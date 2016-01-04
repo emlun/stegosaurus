@@ -79,6 +79,20 @@ module.exports.embedHandler = function(options) {
   }
 };
 
+/**
+ * Build a request handler around steghide extract
+ *
+ * @param options: Object the settings to use for the request handler. Expects
+ *   an object with zero or more of the following keys. The format for the below
+ *   is `name`: type (default).
+ *
+ *    - `uploadDir`: String (`/tmp/stegosaurus`) the path under which to store
+ *      temporary files
+ *    - `imageFileParamName`: String (`stegoImage`) the name of the HTTP query
+ *      parameter containing the image data with the hidden file
+ *    - `extractionPasswordParamName`: String (`extractionPassword`) the name
+ *      of the HTTP query parameter containing the extraction password
+ */
 module.exports.extractHandler = function(options) {
   options = options || {};
   _.defaults(options, {
