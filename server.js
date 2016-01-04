@@ -13,7 +13,7 @@ app.post('/embed', function(req, res) {
   });
   form.parse(req, function(err, fields, files) {
     if(err) {
-      res.send('Failed!');
+      res.status(401).send('401 Bad request');
       return false;
     }
 
