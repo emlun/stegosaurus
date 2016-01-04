@@ -4,6 +4,24 @@ var _ = require('underscore');
 
 var steghide = require('./steghide');
 
+/**
+ * Build a request handler around steghide embed
+ *
+ * @param options the settings to use for the request handler. Expects an
+ *   object with zero or more of the following keys. The format for the below
+ *   is `name`: type (default).
+ *
+ *    - `uploadDir`: String (`/tmp/stegosaurus`) the path under which to store
+ *      temporary files
+ *    - `imageFileParamName`: String (`the_image`) the name of the HTTP query
+ *      parameter containing the cover image data
+ *    - `messageFileParamName`: String (`the_secret`) the name of the HTTP
+ *      query parameter containing the message file data
+ *    - `extractionPasswordParamName`: String (`the_password`) the name of the
+ *      HTTP query parameter containing the extraction password
+ *    - `responseFileNamePrefix`: String (`steghidden-`) the prefix to prepend
+ *      to the uploaded image file name for the result file
+ */
 module.exports.embedHandler = function(options) {
   options = options || {};
   _.defaults(options, {
