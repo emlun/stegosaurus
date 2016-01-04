@@ -5,7 +5,7 @@ var _ = require('underscore');
 
 var app = express();
 
-var steghide_embed = require('.').steghide_embed;
+var steghideEmbed = require('.').steghideEmbed;
 
 app.post('/embed', function(req, res) {
   var form = new multiparty.Form({
@@ -17,21 +17,21 @@ app.post('/embed', function(req, res) {
       return false;
     }
 
-    var image_path = files.the_image[0].path;
-    var secret_path = files.the_secret[0].path;
+    var imagePath = files.the_image[0].path;
+    var secretPath = files.the_secret[0].path;
 
-    var steghidden_path = steghide_embed(
-      image_path,
-      secret_path,
+    var steghiddenPath = steghideEmbed(
+      imagePath,
+      secretPath,
       fields.the_password[0]
     );
 
-    function cleanup(image_path, secret_path, steghidden_path) {
-      _([image_path, secret_path, steghidden_path]).each(function(path) { fs.unlink(path); });
+    function cleanup(imagePath, secretPath, steghiddenPath) {
+      _([imagePath, secretPath, steghiddenPath]).each(function(path) { fs.unlink(path); });
     }
 
-    res.download(steghidden_path, 'steghidden-' + files.the_image[0].originalFilename, function(err) {
-      cleanup(image_path, secret_path, steghidden_path);
+    res.download(steghiddenPath, 'steghidden-' + files.the_image[0].originalFilename, function(err) {
+      cleanup(imagePath, secretPath, steghiddenPath);
     });
   });
 });
