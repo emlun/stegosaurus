@@ -28,6 +28,18 @@ module.exports.embed = function(imagePath, messagePath, password) {
   return steghiddenPath;
 };
 
+/**
+ * @param imagePath: String the path to the image to use as the "stego file"
+ *   -sf argument to steghide
+ * @param password: String the password that was used to encrypt the message
+ *   when it was embedded
+ * @param callback: Function(extractedPath: String, cleanup: Function()) a
+ *   function to call when extraction is completed. The parameters are:
+ *    - `extractedPath`: The path to the extracted file
+ *    - `cleanup`: A function which, when called, will clean up temporary files
+ *      (including the one at `extractedPath`)
+ * @return nothing
+ */
 module.exports.extract = function(imagePath, password, callback) {
   var tmpdir = tmp.dirSync();
 
