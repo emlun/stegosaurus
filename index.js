@@ -1,5 +1,6 @@
 var multiparty = require('multiparty');
-var fs = require('fs');
+var fs = require('fs.extra');
+var path = require('path');
 var _ = require('underscore');
 
 var steghide = require('./steghide');
@@ -44,19 +45,31 @@ module.exports.embedHandler = function(options) {
         return false;
       }
       var imageFile = files[options.imageFileParamName][0];
+      var secretFile = files[options.messageFileParamName][0];
 
       var imagePath = imageFile.path;
-      var secretPath = files[options.messageFileParamName][0].path;
+      var secretPath = secretFile.path;
+      var secretDir = secretPath + '.d';
 
-      var steghiddenPath = steghide.embed(
-        imagePath,
-        secretPath,
-        fields[options.extractionPasswordParamName][0]
-      );
+      var prettySecretPath = path.join(secretDir, path.basename(secretFile.originalFilename));
 
-      function cleanup() {
-        _([imagePath, secretPath, steghiddenPath]).each(function(path) { fs.unlink(path); });
-      }
+      fs.mkdirSync(secretDir);
+      fs.move(secretPath, prettySecretPath, function(err) {
+        if(err) {
+          res.status(503).send('503 Internal server error');
+          console.log(err);
+          return false;
+        }
+
+        var steghiddenPath = steghide.embed(
+          imagePath,
+          prettySecretPath,
+          fields[options.extractionPasswordParamName][0]
+        );
+
+        function cleanup() {
+          _([imagePath, secretPath, secretDir, steghiddenPath]).each(function(path) { fs.rmrfSync(path); });
+        }
 
         res.download(steghiddenPath, options.responseFileNamePrefix + imageFile.originalFilename, cleanup);
       });
