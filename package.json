@@ -1,0 +1,22 @@
+{
+  "name": "stegosaurus",
+  "version": "0.0.0",
+  "description": "Simple steganography service webapp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "steganography",
+    "webapp",
+    "server"
+  ],
+  "author": "Emil Lundberg <lundberg.emil@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3",
+    "multiparty": "^4.1.2",
+    "sprintf": "^0.1.5",
+    "underscore": "^1.8.3"
+  }
+}
