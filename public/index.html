@@ -5,6 +5,12 @@
 
 <body>
   <h1>Embed message in image</h1>
+
+  <p>
+    This service will hide a file in an image using <a
+      href="https://en.wikipedia.org/wiki/Steganography">steganography</a>.
+  </p>
+
   <form action="http://localhost:8080/embed" method="post" enctype="multipart/form-data">
     <div>Image: <input type="file" name="coverImage" /></div>
     <div>Secret file: <input type="file" name="secretFile" /></div>
@@ -16,8 +22,9 @@
 
   <h1>Disclaimer</h1>
   <p>
-    This service is <strong>NOT SECURE</strong>, in any sense of the word. It
-    was lazily whipped together in a few hours as a fun proof of concept.
+    This service is a demo, and is <strong>NOT SECURE</strong> in any sense of
+    the word. It was lazily whipped together in a few hours as a fun proof of
+    concept.
 
     Both your secret message and the extraction password will be sent in
     cleartext to the server. They can be intercepted by any eavesdropper along
