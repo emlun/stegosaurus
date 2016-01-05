@@ -16,9 +16,9 @@ Install the dependencies and start the app.
     $ npm start
 
 Now `POST` an image file, a message file and a password to
-`http://localhost:8080/hide`. The server will respond with a binary stream of
-the image with the secret embedded. The following example reproduces the one
-from [this guide][scottlinux]:
+`http://localhost:8080/embed`. The server will respond with a binary stream
+of the image with the secret embedded. The following example reproduces the
+one from [this guide][scottlinux]:
 
     $ curl -F coverImage=@tux.jpg -F secretFile=@mytext.txt -F extractionPassword=scottlinux http://localhost:8080/embed > stegtux.jpg
 
